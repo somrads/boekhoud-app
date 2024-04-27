@@ -1,0 +1,43 @@
+services:
+  api:
+    env_file:
+      - .env
+    build: ./images/api
+    ports:
+      - 80:3000
+    volumes:
+      - ./images/api/src:/usr/app/src
+    environment:
+      POSTGRES_CONNECTION_STRING: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@store:5432/${POSTGRES_DB}"
+      NODE_ENV: development
+    depends_on:
+      - store
+    healthcheck:
+      test: [ "CMD", "node", "--version" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  store:
+    image: postgres:latest
+    container_name: database
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
