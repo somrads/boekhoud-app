@@ -11,10 +11,10 @@ module.exports = {
    *
    * @returns {Promise} A promise that resolves when connection is successful.
    */
-  connect: () => {
-    return knex
-      .raw("SELECT 1+1 AS result")
-      .then(() => console.log("Connected to PostgreSQL server"));
+  connect: async () => {
+    await knex
+      .raw("SELECT 1+1 AS result");
+    return console.log("Connected to PostgreSQL server");
   },
 
   /**
