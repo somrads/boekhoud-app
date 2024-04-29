@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "knex migrate:latest --knexfile ./src/db/knexfile --debug"
+    "migrate": "knex migrate:latest --knexfile ./src/db/knexfile",
+    "down": "knex migrate:rollback --knexfile ./src/db/knexfile"
+
   },
   "keywords": [],
   "author": "",

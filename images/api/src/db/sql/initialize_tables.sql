@@ -1,3 +1,4 @@
+-- Create the 'bkpf' table first as it needs to be referenced later
 CREATE TABLE "bkpf" (
   "bukrs" char(4),
   "belnr" char(10),
@@ -11,6 +12,18 @@ CREATE TABLE "bkpf" (
   PRIMARY KEY ("bukrs", "belnr", "gjahr")
 );
 
+-- Comments for 'bkpf' columns
+COMMENT ON COLUMN "bkpf"."bukrs" IS 'Bedrijfsnummer';
+COMMENT ON COLUMN "bkpf"."belnr" IS 'Documentnummer boekhoudingsdocument';
+COMMENT ON COLUMN "bkpf"."gjahr" IS 'Boekjaar';
+COMMENT ON COLUMN "bkpf"."blart" IS 'Documentsoort';
+COMMENT ON COLUMN "bkpf"."bldat" IS 'Documentdatum in document';
+COMMENT ON COLUMN "bkpf"."budat" IS 'Boekingsdatum in document';
+COMMENT ON COLUMN "bkpf"."monat" IS 'Boekmaand';
+COMMENT ON COLUMN "bkpf"."cpudt" IS 'Dag waarop boekhoudingsdocument is ingevoerd';
+COMMENT ON COLUMN "bkpf"."cputm" IS 'Tijd waarop gegevens zijn ingevoerd';
+
+-- Create the 'bseg' table which references 'bkpf'
 CREATE TABLE "bseg" (
   "bukrs" char(4),
   "belnr" char(10),
@@ -24,44 +37,18 @@ CREATE TABLE "bseg" (
   PRIMARY KEY ("bukrs", "belnr", "gjahr", "buzei")
 );
 
-COMMENT ON COLUMN "bkpf"."bukrs" IS 'Bedrijfsnummer';
-
-COMMENT ON COLUMN "bkpf"."belnr" IS 'Documentnummer boekhoudingsdocument';
-
-COMMENT ON COLUMN "bkpf"."gjahr" IS 'Boekjaar';
-
-COMMENT ON COLUMN "bkpf"."blart" IS 'Documentsoort';
-
-COMMENT ON COLUMN "bkpf"."bldat" IS 'Documentdatum in document';
-
-COMMENT ON COLUMN "bkpf"."budat" IS 'Boekingsdatum in document';
-
-COMMENT ON COLUMN "bkpf"."monat" IS 'Boekmaand';
-
-COMMENT ON COLUMN "bkpf"."cpudt" IS 'Dag waarop boekhoudingsdocument is ingevoerd';
-
-COMMENT ON COLUMN "bkpf"."cputm" IS 'Tijd waarop gegevens zijn ingevoerd';
-
-COMMENT ON COLUMN "bseg"."bukrs" IS 'Bedrijfsnummer';
-
-COMMENT ON COLUMN "bseg"."belnr" IS 'Documentnummer boekhoudingsdocument';
-
-COMMENT ON COLUMN "bseg"."gjahr" IS 'Boekjaar';
-
-COMMENT ON COLUMN "bseg"."buzei" IS 'Nummer van boekingsregel in boekhoudingsdocument';
-
-COMMENT ON COLUMN "bseg"."buzid" IS 'Identificatie van boekingsregel';
-
-COMMENT ON COLUMN "bseg"."augdt" IS 'Datum van vereffening';
-
-COMMENT ON COLUMN "bseg"."augcp" IS 'Invoerdatum van de vereffening';
-
-COMMENT ON COLUMN "bseg"."augbl" IS 'Documentnummer van vereffeningsdocument';
-
-COMMENT ON COLUMN "bseg"."bschl" IS 'Boekingssleutel';
-
+-- Foreign keys in 'bseg' referencing 'bkpf'
 ALTER TABLE "bseg" ADD FOREIGN KEY ("bukrs") REFERENCES "bkpf" ("bukrs");
-
 ALTER TABLE "bseg" ADD FOREIGN KEY ("belnr") REFERENCES "bkpf" ("belnr");
-
 ALTER TABLE "bseg" ADD FOREIGN KEY ("gjahr") REFERENCES "bkpf" ("gjahr");
+
+-- Comments for 'bseg' columns
+COMMENT ON COLUMN "bseg"."bukrs" IS 'Bedrijfsnummer';
+COMMENT ON COLUMN "bseg"."belnr" IS 'Documentnummer boekhoudingsdocument';
+COMMENT ON COLUMN "bseg"."gjahr" IS 'Boekjaar';
+COMMENT ON COLUMN "bseg"."buzei" IS 'Nummer van boekingsregel in boekhoudingsdocument';
+COMMENT ON COLUMN "bseg"."buzid" IS 'Identificatie van boekingsregel';
+COMMENT ON COLUMN "bseg"."augdt" IS 'Datum van vereffening';
+COMMENT ON COLUMN "bseg"."augcp" IS 'Invoerdatum van de vereffening';
+COMMENT ON COLUMN "bseg"."augbl" IS 'Documentnummer van vereffeningsdocument';
+COMMENT ON COLUMN "bseg"."bschl" IS 'Boekingssleutel';
