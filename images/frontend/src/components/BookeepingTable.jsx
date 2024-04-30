@@ -10,7 +10,7 @@ const FinancialData = () => {
     const fetchData = async () => {
       try {
         // Fetch financial data
-        const financialResponse = await fetch('http://localhost:80/financiele-boekhouding');
+        const financialResponse = await fetch('http://localhost:80/boekhouding');
         if (!financialResponse.ok) {
           throw new Error('Network response for financial data was not ok');
         }
@@ -18,7 +18,7 @@ const FinancialData = () => {
         setFinancialData(financialData);
 
         // Fetch column comments
-        const commentsResponse = await fetch('http://localhost:80/table-comments/financiele-boekhouding');
+        const commentsResponse = await fetch('http://localhost:80/table-comments/boekhouding');
         if (!commentsResponse.ok) {
           throw new Error('Network response for column comments was not ok');
         }
@@ -41,7 +41,7 @@ const FinancialData = () => {
 
   return (
     <div>
-      <h2>Financial Data</h2>
+      <h2>Bookkeeping Data</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
