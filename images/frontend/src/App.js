@@ -1,15 +1,15 @@
 import React from 'react'
-import FinancialTable from './components/FinancialTable'
-import BookkeepingTable from "./components/BookeepingTable"
-import Dashboard from './components/Dashboard'
+import FinancialData from './components/FinancialData'
+import BookkeepingData from "./components/BookeepingData"
+import FilterComponent from './components/FilterComponent'
 
 function App() {
   return (
     <div>
-
-{/* <FinancialTable/>
-<BookkeepingTable/> */}
-{/* <Dashboard/> */}
+{/* 
+<FinancialData/>
+<BookkeepingData/> */}
+<FilterComponent/>
     </div>
   )
 }
