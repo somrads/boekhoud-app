@@ -93,7 +93,7 @@ const CombinedData = () => {
       <React.Fragment key={index}>
         <tr>
           {keys.slice(0, 3).map((key, colIndex) => (
-            <td key={colIndex}>{row[key]}</td>
+            <td className="column-long-text" key={colIndex}>{row[key]}</td>
           ))}
           <td>
             <button onClick={() => toggleRecordExpansion(index)}>{isExpanded ? 'Hide' : 'See More'}</button>
@@ -101,7 +101,7 @@ const CombinedData = () => {
         </tr>
         {isExpanded && (
           <tr>
-            <td colSpan="4">
+            <td className="column-long-text" colSpan="4">
               <table>
                 <thead>
                   <tr>
@@ -232,12 +232,13 @@ const CombinedData = () => {
               </label>
             </div>
           </div>
-          <div>Total Records: {combinedData.length}, Filtered: {filteredData.length}</div>
+          <div className='total'>Total Records: {combinedData.length}, Filtered: {filteredData.length}</div>
+          <div className="table-container">
           <table>
             <thead>
               <tr>
                 {Object.keys(columnComments).slice(0, 3).map(column => (
-                  <th key={column}>{columnComments[column]}</th>
+                  <th className='column-long-text' key={column}>{columnComments[column]}</th>
                 ))}
               </tr>
             </thead>
@@ -245,6 +246,7 @@ const CombinedData = () => {
               {filteredData.map((row, index) => renderRecord(row, index))}
             </tbody>
           </table>
+          </div>
         </>
     
       )}
