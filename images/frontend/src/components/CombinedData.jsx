@@ -6,16 +6,7 @@ const CombinedData = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [columnComments, setColumnComments] = useState({});
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    bukrs: '',
-    belnr: '',
-    gjahr: '',
-    buzei: '',
-    bschl: '',
-    augdt: '',
-    blart: '',  
-    bldat: ''  
-  });
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +28,13 @@ const CombinedData = () => {
           throw new Error('Network response was not ok');
         }
 
+        const allComments = { ...convertComments(financialColumnComments), ...convertComments(bookkeepingColumnComments) };
+        setColumnComments(allComments);
+        // Reset filters based on fetched column comments
+        setFilters(Object.keys(allComments).reduce((acc, key) => ({ ...acc, [key]: '' }), {}));
+
         setFinancialData(financialData);
         setBookkeepingData(bookkeepingData);
-        setColumnComments({ ...convertComments(financialColumnComments), ...convertComments(bookkeepingColumnComments) });
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -132,16 +127,20 @@ const CombinedData = () => {
         <>
           <div>
             {Object.keys(filters).map(key => (
-              <input
-                key={key}
-                type="text"
-                name={key}
-                value={filters[key]}
-                placeholder={key.toUpperCase()}
-                onChange={handleFilterChange}
-              />
+              <div key={key}>
+                <label>
+                  {columnComments[key] || key.toUpperCase()}
+                  <input
+                    type="text"
+                    name={key}
+                    value={filters[key]}
+                    onChange={handleFilterChange}
+                  />
+                </label>
+              </div>
             ))}
           </div>
+          <div>Total Records: {combinedData.length}, Filtered: {filteredData.length}</div>
           <table>
             <thead>
               <tr>
