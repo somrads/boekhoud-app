@@ -8,7 +8,16 @@ const CombinedData = () => {
   const [combinedData, setCombinedData] = useState([]);
   const [columnComments, setColumnComments] = useState({});
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({
+    bukrs: '',
+    gjahr: '',
+    belnr: '',
+    blart: '',
+    bldat: '',
+    buzei: '',
+    bschl: '',
+    augdt: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,19 +143,94 @@ const CombinedData = () => {
       ) : (
         <>
           <div className='input-wrap'>
-            {Object.keys(filters).map(key => (
-              <div className="input" key={key}>
-                <label>
-                  {columnComments[key] || key.toUpperCase()}
-                  <input
-                    type="text"
-                    name={key}
-                    value={filters[key]}
-                    onChange={handleFilterChange}
-                  />
-                </label>
-              </div>
-            ))}
+            <div className="input">
+              <label>
+                {columnComments['bukrs'] || 'BUKRS'}
+                <input
+                  type="text"
+                  name="bukrs"
+                  value={filters['bukrs']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['gjahr'] || 'GJAHR'}
+                <input
+                  type="text"
+                  name="gjahr"
+                  value={filters['gjahr']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['belnr'] || 'BELNR'}
+                <input
+                  type="text"
+                  name="belnr"
+                  value={filters['belnr']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['blart'] || 'BLART'}
+                <input
+                  type="text"
+                  name="blart"
+                  value={filters['blart']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['bldat'] || 'BLDAT'}
+                <input
+                  type="text"
+                  name="bldat"
+                  value={filters['bldat']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['buzei'] || 'BUZEI'}
+                <input
+                  type="text"
+                  name="buzei"
+                  value={filters['buzei']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['bschl'] || 'BSCHL'}
+                <input
+                  type="text"
+                  name="bschl"
+                  value={filters['bschl']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
+            <div className="input">
+              <label>
+                {columnComments['augdt'] || 'AUGDT'}
+                <input
+                  type="text"
+                  name="augdt"
+                  value={filters['augdt']}
+                  onChange={handleFilterChange}
+                />
+              </label>
+            </div>
           </div>
           <div>Total Records: {combinedData.length}, Filtered: {filteredData.length}</div>
           <table>
