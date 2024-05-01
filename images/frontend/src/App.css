@@ -1,0 +1,115 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    color: #333;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0% 0%;
+    padding: 1%;
+    background-color: #6dc0d0;
+}
+.header h1{
+    display: flex;
+    margin-right: 50%;
+    font-family: 'Arial Bold';
+    color: #033449;
+
+}
+
+.content-wrap{
+    margin: 5%;
+}
+/* Header styling */
+h2 {
+    color: #444;
+}
+
+/* Styling for the loading and information text */
+p, .info {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Container for inputs and their labels */
+.div-input {
+    margin-bottom: 10px;
+}
+
+/* Label styling */
+label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.input-wrap{
+    display: flex;
+}
+
+/* Input field styling */
+input[type="text"] {
+    display: flex;
+    width: calc(50% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button styling */
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f8f8;
+}
+
+/* Nested table specifics */
+td table th, td table td {
+    padding: 4px;
+    font-size: 14px;
+}
+
+td table th {
+    background-color: #e8e8e8;
+}
+
+td table {
+    margin-top: 10px;
+}
+
+/* Clear fix for layout */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

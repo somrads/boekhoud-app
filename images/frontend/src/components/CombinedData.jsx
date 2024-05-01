@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import "../App.css"
+import Logo from "../logo.jpg"
 
 const CombinedData = () => {
   const [financialData, setFinancialData] = useState([]);
@@ -120,14 +122,20 @@ const CombinedData = () => {
 
   return (
     <div>
-      <h2>Booky</h2>
+        <div className="header">
+            <img src={Logo} alt='KuLeuvenLogo' />
+            <h1>Booky</h1>
+        </div>
+
+        <div className="content-wrap">
+      <h2>Document Directory</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <div>
+          <div className='input-wrap'>
             {Object.keys(filters).map(key => (
-              <div key={key}>
+              <div className="input" key={key}>
                 <label>
                   {columnComments[key] || key.toUpperCase()}
                   <input
@@ -154,7 +162,9 @@ const CombinedData = () => {
             </tbody>
           </table>
         </>
+    
       )}
+         </div>
     </div>
   );
 };
