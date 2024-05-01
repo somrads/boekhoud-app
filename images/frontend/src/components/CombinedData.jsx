@@ -13,6 +13,8 @@ const CombinedData = () => {
     buzei: '',
     bschl: '',
     augdt: '',
+    blart: '',  
+    bldat: ''  
   });
 
   useEffect(() => {
@@ -64,18 +66,66 @@ const CombinedData = () => {
     setFilters(prev => ({ ...prev, [name]: value }));
   };
 
-  const filteredData = combinedData.filter(row => {
-    return Object.entries(filters).every(([key, value]) => value === '' || (row[key] && row[key].includes(value)));
-  });
-
   const convertComments = (comments) => comments.reduce((acc, { column_name, column_comment }) => ({
     ...acc,
     [column_name]: column_comment
   }), {});
 
+  const [expandedRecords, setExpandedRecords] = useState({});
+
+  const toggleRecordExpansion = (index) => {
+    setExpandedRecords(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const renderRecord = (row, index) => {
+    const isExpanded = !!expandedRecords[index];
+    const keys = Object.keys(row);
+    return (
+      <React.Fragment key={index}>
+        <tr>
+          {keys.slice(0, 3).map((key, colIndex) => (
+            <td key={colIndex}>{row[key]}</td>
+          ))}
+          <td>
+            <button onClick={() => toggleRecordExpansion(index)}>{isExpanded ? 'Hide' : 'See More'}</button>
+          </td>
+        </tr>
+        {isExpanded && (
+          <tr>
+            <td colSpan="4">
+              <table>
+                <thead>
+                  <tr>
+                    {keys.slice(3).map((key, colIndex) => (
+                      <th key={colIndex}>{columnComments[key]}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    {keys.slice(3).map((key, colIndex) => (
+                      <td key={colIndex}>{row[key]}</td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        )}
+      </React.Fragment>
+    );
+  };
+
+  const filteredData = combinedData.filter(row => {
+    return Object.entries(filters).every(([key, value]) => value === '' || (row[key] && row[key].includes(value)));
+  });
+
   return (
     <div>
-      <h2>Combined Data</h2>
+      <h2>Booky</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -95,19 +145,13 @@ const CombinedData = () => {
           <table>
             <thead>
               <tr>
-                {Object.keys(columnComments).map(column => (
+                {Object.keys(columnComments).slice(0, 3).map(column => (
                   <th key={column}>{columnComments[column]}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((row, index) => (
-                <tr key={index}>
-                  {Object.keys(row).map((key, colIndex) => (
-                    <td key={colIndex}>{row[key]}</td>
-                  ))}
-                </tr>
-              ))}
+              {filteredData.map((row, index) => renderRecord(row, index))}
             </tbody>
           </table>
         </>
