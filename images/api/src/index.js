@@ -9,20 +9,16 @@ const boekhoudingRouter = require("./routes/boekHoudingsRoutes")
 const financieleBoekhoudingRouter = require("./routes/financieleBoekhoudingsRoutes")
 const tableCommentsRouter = require("./routes/tableComments")
 
-// Middleware
+// Database Connection
 db.connect();
 
-app.use(bodyParser.json());
-
+//Middleware
 app.use(express.json());
-
 app.use(cors());
 
 //Routes
 app.use("/boekhouding", boekhoudingRouter);
-
 app.use("/financiele-boekhouding", financieleBoekhoudingRouter);
-
 app.use("/table-comments", tableCommentsRouter);
 
 app.get("/", (request, response) => {

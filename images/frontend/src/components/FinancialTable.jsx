@@ -1,4 +1,3 @@
-// components/FinancialData.js
 import React, { useState, useEffect } from 'react';
 
 const FinancialData = () => {
