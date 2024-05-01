@@ -13,6 +13,16 @@ router.get("/", async (request, response) => {
     }
 });
 
+router.get("/filter", async (req, res) => {
+    try {
+        const { bukrs, belnr, gjahr, blart, bldat} = req.query;
+        const data = await knex('bseg').where({ bukrs, belnr, gjahr, blart, bldat});
+        res.json(data);
+    } catch (err) {
+        res.status(500).send(`Error retrieving bseg records: ${err.message}`);
+    }
+});
+
 // Post route for inserting data into 'bkpf' table
 router.post("/", async (request, response) => {
     // Extract data from request body

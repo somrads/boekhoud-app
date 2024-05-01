@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 
 router.get("/filter", async (req, res) => {
     try {
-        const { bukrs, belnr, gjahr } = req.query;
-        const data = await knex('bseg').where({ bukrs, belnr, gjahr });
+        const { bukrs, belnr, gjahr, buzei, bschl, augdt } = req.query;
+        const data = await knex('bseg').where({ bukrs, belnr, gjahr, buzei, bschl, augdt });
         res.json(data);
     } catch (err) {
         res.status(500).send(`Error retrieving bseg records: ${err.message}`);
