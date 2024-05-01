@@ -18,6 +18,20 @@ services:
       timeout: 5s
       retries: 5
 
+  frontend:
+    build:
+      context: ./images/frontend
+    container_name: frontend
+    ports:
+      - 5001:5000
+    depends_on:
+      - api
+    volumes:
+      - ./images/frontend:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+
   store:
     image: postgres:latest
     container_name: database
