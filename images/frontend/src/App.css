@@ -88,6 +88,7 @@ button:hover {
 .table-container {
     width: 100%;
     overflow-x: auto;
+    margin-top: 20px;
 }
 
 table {
@@ -113,7 +114,6 @@ th.column-long-text, td.column-long-text {
 th {
     position: sticky;
     top: 0;
-    background-color: #f1f1f1;
     z-index: 2;
 }
 
