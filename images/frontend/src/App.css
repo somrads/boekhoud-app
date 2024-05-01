@@ -6,59 +6,60 @@ body {
     color: #333;
 }
 
-.header{
+/* Header styling */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0% 0%;
+    margin: 0;
     padding: 1%;
     background-color: #6dc0d0;
 }
-.header h1{
-    display: flex;
+
+.header h1 {
     margin-right: 50%;
     font-family: 'Arial Bold';
     color: #033449;
-
 }
 
-.content-wrap{
+/* Content styling */
+.content-wrap {
     margin: 5%;
 }
-/* Header styling */
+
 h2 {
     color: #444;
 }
 
-/* Styling for the loading and information text */
 p, .info {
     color: #666;
     font-size: 16px;
 }
 
-/* Container for inputs and their labels */
-.div-input {
+/* Input and label styling */
+.input-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input {
+    width: calc(50% - 20px);
     margin-bottom: 10px;
 }
 
-/* Label styling */
 label {
-    margin-bottom: 5px;
     font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.input-wrap{
-    display: flex;
-}
-
-/* Input field styling */
 input[type="text"] {
-    display: flex;
-    width: calc(50% - 20px);
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+
 }
 
 /* Button styling */
